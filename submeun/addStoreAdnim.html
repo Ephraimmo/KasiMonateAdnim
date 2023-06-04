@@ -15,7 +15,7 @@
 </head>
 
 <style>
-  
+  feDiffuseLighting
   .border {
     border-width:3px !important;
 }
@@ -228,10 +228,10 @@ const realdb = getDatabase();
 	var proglab = document.getElementById('upprogress');
 	var selbtn = document.getElementById('selbtn');
 	var DownBtn = document.getElementById('DownBtn');
-
+  var originalBranch = "";
 	var CompanyName            = document.getElementById("NameCate");
   var Location               = document.getElementById('Location');
-
+  var ListNameUsed = [];
   var uploadingButton = document.getElementById('CloseButton');
 	
 	var input = document.createElement('input');
@@ -247,6 +247,8 @@ const realdb = getDatabase();
     //addEventListener for any button
     document.addEventListener("click",async function (e){
 
+      
+
         if (e.target.innerHTML == "Add Branche")
         {
             CompanyName           .value = "";
@@ -257,6 +259,7 @@ const realdb = getDatabase();
             document.getElementById('myimg').height = 90;
         }else if (e.target.innerHTML == "Add")
         {
+          
           if (CompanyName.value == "")
             {
               
@@ -274,20 +277,22 @@ const realdb = getDatabase();
               document.getElementById('myimg').className += "border";
               createToast('Danger', 'Please complete all mandatory Fields!', 'toast-danger');
               return;
-            }else{
+            }else if (ListNameUsed.includes(CompanyName.value)  == false){
               uploadingButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+              UploadProcess(true, sessionStorage.getItem("MainAdnim"));
+            }else if (ListNameUsed.includes(CompanyName.value)  == true){
+              createToast('Danger', 'This branch already exist!', 'toast-danger');
             }
-
-          
-
-          UploadProcess(true, sessionStorage.getItem("MainAdnim"));
         }else if (e.target.innerHTML == "Edit")
         {
+            
             getDoumentWithGivenID("BusinessesData" ,e.target.id);
             document.getElementById("CloseButton").innerHTML = "Save";
             namebox.value = "something";
+            files = [];
         }else if (e.target.innerHTML == "Save")
         {
+          
           if (CompanyName.value == "")
             {
               document.getElementById("Submitform").click();
@@ -298,8 +303,14 @@ const realdb = getDatabase();
               document.getElementById("Submitform").click();
               createToast('Danger', 'Please complete all mandatory Fields!', 'toast-danger');
               return;
+            }else if (originalBranch == CompanyName.value){
+              UploadProcess(false, sessionStorage.getItem("MainAdnim"));
+            }else if (originalBranch != CompanyName.value){
+              if (ListNameUsed.includes(CompanyName.value)  == false)
+                UploadProcess(false, sessionStorage.getItem("MainAdnim"));
+              else if (ListNameUsed.includes(CompanyName.value)  == true)
+                createToast('Danger', 'This branch already exist!', 'toast-danger');
             }
-            UploadProcess(false, sessionStorage.getItem("MainAdnim"));
             
             
         }else if (e.target.innerText == "Delete"){
@@ -366,12 +377,14 @@ const realdb = getDatabase();
 
   
 	async function UploadProcess(Add,pathCategory) {
+
+ 
   
   if (files.length == 0) {
-  
+    
     updateDoument_GivenID("BusinessesData",CategoryPosition,document.getElementById("myimg").src);
-    return};
-  
+    return;
+  };
 
   document.getElementById('upprogress').style.visibility="visible";
 
@@ -478,6 +491,7 @@ const realdb = getDatabase();
        img.width = 90;
        img.height = 90;
        document.getElementById("NameCate").value              = docSnap.data().CompanyName;
+       originalBranch = docSnap.data().CompanyName;
        Location.value                                         = docSnap.data().UserAddress;     
        
     }else
@@ -603,7 +617,7 @@ async function b_confirm(msg) {
         }
       })
     }
-   
+
    
 //get all Date for table category
    async function getAllDate(categoryPath){
@@ -627,7 +641,7 @@ async function b_confirm(msg) {
             var imgUrl = '<img id = ' + newPosition + ' src= ' + doc.data().url  + ' alt= ' + doc.data().StoreName  + ' style="width:60px;height:70px;">';
             var Action = '<button id = ' + newPosition + ' type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Edit</button>'
                        + '<button type="button" id = ' + newPosition + ' class="btn btn-danger">Delete</button>';
-            
+            ListNameUsed.push(doc.data().CompanyName);
             dataTable.push([count,doc.data().CompanyName,doc.data().UserAddress,imgUrl,doc.data().open,Action]);
 
           }    

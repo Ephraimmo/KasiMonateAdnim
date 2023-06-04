@@ -291,7 +291,7 @@ td.text-right {
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers" id = "orderCompletedNumbers">0</div>
+                            <div class="numbers"  id = "All Order">0</div>
                             <div class="cardName">All Order</div>
                         </div>
 
@@ -302,7 +302,7 @@ td.text-right {
 
                     <div class="card">
                         <div>
-                            <div class="numbers" id="orderIncoming">0</div>
+                            <div class="numbers" id="User">0</div>
                             <div class="cardName">User</div>
                         </div>
 
@@ -313,7 +313,7 @@ td.text-right {
 
                     <div class="card">
                         <div>
-                            <div class="numbers" id="orderRejected">0</div>
+                            <div class="numbers" id="Branches">0</div>
                             <div class="cardName">Branches</div>
                         </div>
 
@@ -324,7 +324,7 @@ td.text-right {
 
                     <div class="card">
                         <div>
-                            <div class="numbers" id="TotalEarning">R0.00</div>
+                            <div class="numbers" id="Earning">R0.00</div>
                             <div class="cardName">Earning</div>
                         </div>
 
@@ -459,13 +459,13 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
         
         await onSnapshot( collection(db, 'BusinessesData'), (docSnap) => {
             var SubstoreCounter = 0;
-            document.getElementById("orderCompletedNumbers").innerText = 0;
+            document.getElementById("All Order").innerText = 0;
             docSnap.forEach(doc => {
 
               if (doc.data().MainAdnim == categoryPath) 
               {
                 SubstoreCounter++;
-                document.getElementById('orderRejected').innerHTML = SubstoreCounter;
+                document.getElementById('Branches').innerHTML = SubstoreCounter;
                 getAllOrder(doc.data().CompanyName,SubstoreCounter);
                 
               }
@@ -480,7 +480,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
               if (doc.data().MainAdnim == categoryPath) 
               {
                 SubstoreCounter++;
-                document.getElementById('orderIncoming').innerHTML = SubstoreCounter;
+                document.getElementById('User').innerHTML = SubstoreCounter;
                 
               }
 
@@ -544,12 +544,12 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
     async function getAllOrder(companyName,index){
         var totalSub = 0;
         var loadNew = false;
-        currentMoney = parseInt(document.getElementById("TotalEarning").innerHTML.toString().replace('R',''));
+        currentMoney = parseInt(document.getElementById("Earning").innerHTML.toString().replace('R',''));
         const starCountRef = await ref(realdb, companyName);
         //AllTotal += AllTotal;
         var currentMoney = 0;
         await onValue(starCountRef, async (snapshot) => {
-            var currentVale = parseInt(document.getElementById("orderCompletedNumbers").innerText);
+            var currentVale = parseInt(document.getElementById("All Order").innerText);
             
             totalmoney[0] = 0;
             var counter = 0;
@@ -575,7 +575,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
                   if (childSnapshot.val().ready == "Reject" && loadNew == false && CompanyGetName == companyName)
                   {
                     loss += parseFloat(childSnapshot.val().Total);
-                    document.getElementById("orderCompletedNumbers").innerText = currentVale + countAllOrder[index] - totalSub;
+                    document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
                   }else if (childSnapshot.val().ready == false && loadNew == false && CompanyGetName == companyName)
                   {
                     revenue += parseFloat(childSnapshot.val().Total);
@@ -584,13 +584,13 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
                     profit += parseFloat(childSnapshot.val().Total);
                   
 
-                    document.getElementById("orderCompletedNumbers").innerText = currentVale + countAllOrder[index] - totalSub;
+                    document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
                     totalmoney[0] = parseFloat(totalmoney[0]) + parseFloat(childSnapshot.val().Total);
                     if (totalmoney[0] != null)
                     {
                         AllTotal = totalmoney[0] + totalmoney[1];
                         
-                        document.getElementById("TotalEarning").innerHTML = "R" + AllTotal;
+                        document.getElementById("Earning").innerHTML = "R" + AllTotal;
                     }
                     console.log(childSnapshot.val().ready);
                 }
@@ -662,9 +662,9 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
             changeSection(4);
         });
 
-        document.getElementById("Change5").addEventListener("click",function() {
-            changeSection(5);
-        });
+        //document.getElementById("Change5").addEventListener("click",function() {
+          //  changeSection(5);
+        //});
 
         
 
@@ -678,7 +678,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
                 document.getElementById("section 2").style.display = 'none';
                 document.getElementById("section 3").style.display = 'none';
                 document.getElementById("section 4").style.display = 'none';
-                document.getElementById("section 5").style.display = 'none';
+                //document.getElementById("section 5").style.display = 'none';
             
             }else
             {
@@ -699,7 +699,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
           document.getElementById("section 2").style.display = 'block';
           document.getElementById("section 3").style.display = 'none';
           document.getElementById("section 4").style.display = 'none';
-          document.getElementById("section 5").style.display = 'none';
+          //document.getElementById("section 5").style.display = 'none';
         }
         else if (section == 3)
         {
@@ -708,7 +708,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
           document.getElementById("section 2").style.display = 'none';
           document.getElementById("section 3").style.display = 'block';
           document.getElementById("section 4").style.display = 'none';
-          document.getElementById("section 5").style.display = 'none';
+          //document.getElementById("section 5").style.display = 'none';
 
         }
         else if (section == 4)
@@ -718,7 +718,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
           document.getElementById("section 2").style.display = 'none';
           document.getElementById("section 3").style.display = 'none';
           document.getElementById("section 4").style.display = 'block';
-          document.getElementById("section 5").style.display = 'none';
+          //document.getElementById("section 5").style.display = 'none';
         }
         else if (section == 5)
         {
@@ -727,7 +727,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
           document.getElementById("section 2").style.display = 'none';
           document.getElementById("section 3").style.display = 'none';
           document.getElementById("section 4").style.display = 'none';
-          document.getElementById("section 5").style.display = 'block';
+          //document.getElementById("section 5").style.display = 'block';
 
         }
     }

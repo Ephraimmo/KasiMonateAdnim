@@ -248,7 +248,9 @@ const realdb = getDatabase();
 	var proglab = document.getElementById('upprogress');
 	var selbtn = document.getElementById('selbtn');
 	var DownBtn = document.getElementById('DownBtn');
-
+  
+  var ListNameUsed = [];
+  var originalBranch = "";
 	var CompanyName            = document.getElementById("NameCate");
   var Location               = document.getElementById('Location');
   const SubStore                 = document.getElementById("SelectCategory");
@@ -275,6 +277,7 @@ async function getAllCategory(categoryPath){
    })
   }
 
+   
  
     var countLastPosition = 0;
     //get data and put it in a table 
@@ -293,6 +296,7 @@ async function getAllCategory(categoryPath){
             document.getElementById('myimg').height = 90;
         }else if (e.target.innerHTML == "Add")
         {
+          
           if (CompanyName.value == "")
             {
               
@@ -316,18 +320,22 @@ async function getAllCategory(categoryPath){
               document.getElementById('myimg').className += "border";
               createToast('Danger', 'Please complete all mandatory Fields!', 'toast-danger');
               return;
-            }else{
+            }else if (ListNameUsed.includes(CompanyName.value) == false){
               uploadingButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+              UploadProcess(true, sessionStorage.getItem("MainAdnim"));
+            }else if (ListNameUsed.includes(CompanyName.value) == true){
+              createToast('Danger', 'This username already exist!', 'toast-danger');
             }
 
           
 
-          UploadProcess(true, sessionStorage.getItem("MainAdnim"));
+          
         }else if (e.target.innerHTML == "Edit")
         {
             getDoumentWithGivenID("UsersSubAdnim" ,e.target.id);
             document.getElementById("CloseButton").innerHTML = "Save";
             namebox.value = "something";
+            files = [];
         }else if (e.target.innerHTML == "Save")
         {
           if (CompanyName.value == "")
@@ -346,8 +354,14 @@ async function getAllCategory(categoryPath){
               document.getElementById("Submitform").click();
               createToast('Danger', 'Please complete all mandatory Fields!', 'toast-danger');
               return;
+            }else if (originalBranch == CompanyName.value){
+              UploadProcess(false, sessionStorage.getItem("MainAdnim"));
+            }else if (originalBranch != CompanyName.value){
+              if (ListNameUsed.includes(CompanyName.value) == false)
+                UploadProcess(false, sessionStorage.getItem("MainAdnim"));
+              else if (ListNameUsed.includes(CompanyName.value) == true)
+                createToast('Danger', 'This username already exist!', 'toast-danger');
             }
-            UploadProcess(false, sessionStorage.getItem("MainAdnim"));
             
             
         }else if (e.target.innerText == "Delete"){
@@ -519,6 +533,7 @@ async function getAllCategory(categoryPath){
         var img = document.getElementById("myimg"); 
         
           CompanyName              .value   =  docSnap.data().Username;
+          originalBranch = docSnap.data().Username;
           Status_Product           .checked =  docSnap.data().Adnim;
           Trending_Product         .checked =  docSnap.data().Delivery;
           Location                 .value   =  docSnap.data().Password;
@@ -692,7 +707,7 @@ async function b_confirm(msg) {
               CategoryStatus = "Adnim";
             else if (doc.data().Delivery == true)
               CategoryStatus = "Delivery";
-            
+              ListNameUsed.push(doc.data().Username);
             data.push([count,doc.data().Username,doc.data().Password,doc.data().SubStore,imgUrl,CategoryStatus,Action]);
             }
           });
