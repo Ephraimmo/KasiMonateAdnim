@@ -1003,6 +1003,7 @@ function checkPassword(password,confirmPassword) {
         UserNumber               : document.getElementById('Country code').value + document.getElementById('Phone').value,
         path                     : "",
         open                     : true,
+        Activate                 : false,
         status                   : true,
         url                      : userUrl,
         urlProfile               : logoUrl,
@@ -1023,11 +1024,12 @@ function checkPassword(password,confirmPassword) {
             closePopup();
             loadingButton.innerHTML = 'Register';
             setEnableOrDiable(false);
-            localStorage.setItem("MainAdnim", CompanyName.value);
-            localStorage.setItem("UserId", pathUserId);
-            localStorage.setItem("UserEmail", Email.value);
-            localStorage.setItem("UserNumber", document.getElementById('Country code').value + document.getElementById('Phone').value);
-            localStorage.setItem("status", true);
+            sessionStorage.setItem("MainAdnim", CompanyName.value);
+            sessionStorage.setItem("UserId", pathUserId);
+            sessionStorage.setItem("UserEmail", Email.value);
+            sessionStorage.setItem("UserNumber", document.getElementById('Country code').value + document.getElementById('Phone').value);
+            sessionStorage.setItem("status", true);
+            sessionStorage.setItem("Activate", false);
           
             window.location.replace("mainIndex.html");
             return;

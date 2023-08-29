@@ -199,6 +199,117 @@ td.text-right {
 }
 
 </style>
+
+<style>
+  /* Styles for the popup module */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  .email-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+  .email-icon i {
+    color: blue;
+  }
+  .message {
+    font-size: 18px;
+  }
+</style>
+<!-- Loading message icons  background: url(https://picsum.photos/2500/1500?image=1041); -->
+<style>
+  .showLoadingToast {
+      visibility: hidden;
+      max-width: 250px;
+      background-color: #17a2b8;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+  }
+
+  .showLoadingToast.show {
+      visibility: visible;
+      opacity: 1;
+  }
+
+  .showLoadingToast i {
+      margin-right: 8px;
+  }
+
+  .loading {
+      animation: rotate 1s linear infinite;
+  }
+
+  @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+  }
+
+  @keyframes fade-out {
+      from {opacity: 1;}
+      to {opacity: 0;}
+  }
+</style>
+<style>
+  .toast {
+      visibility: hidden;
+      max-width: 250px;
+      background-color: #dc3545;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+  }
+
+  .toast.show {
+      visibility: visible;
+      opacity: 1;
+  }
+
+  .toast i {
+      margin-right: 8px;
+  }
+
+  @keyframes fade-out {
+      from {opacity: 1;}
+      to {opacity: 0;}
+  }
+</style>
 <script type="text/javascript">
     window.history.forward();
     function noBack()
@@ -208,6 +319,24 @@ td.text-right {
   </script>
 
 <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+
+  <div id="toast" class="toast"></div>
+    <div id="showLoadingToast" class="showLoadingToast"></div>
+      <div class="popup" id="popup">
+        <div class="popup-content">
+          <span class="close" onclick="closePopup()">&times;</span>
+          <div class="email-icon">
+            <ion-icon name="warning-outline"></ion-icon>
+          </div>
+          <div class="message">
+            <p>Please verify your email to continue.</p>
+            <p>Click on the link sent to your email to complete the verification process.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <!-- =============== Navigation ================ -->
     <div class="container">
         <div class="navigation" id="navigation">
@@ -233,7 +362,7 @@ td.text-right {
                 <li>
                     <a href="#" id="Change2">
                         <span class="icon">
-                            <ion-icon name="albums-outline"></ion-icon>
+                          <ion-icon name="storefront-outline"></ion-icon>
                         </span>
                         <span class="title">Branches</span>
                     </a>
@@ -242,7 +371,7 @@ td.text-right {
                 <li>
                     <a href="#"- id="Change3">
                         <span class="icon">
-                            <ion-icon name="podium-outline"></ion-icon>
+                            <ion-icon name="person-outline"></ion-icon>
                         </span>
                         <span class="title">Users</span>
                     </a>
@@ -251,7 +380,7 @@ td.text-right {
                 <li>
                     <a href="#" id="Change4">
                         <span class="icon">
-                            <ion-icon name="add-circle-outline"></ion-icon>
+                          <ion-icon name="receipt-outline"></ion-icon>
                         </span>
                         <span class="title">Report</span>
                     </a>
@@ -284,9 +413,11 @@ td.text-right {
                     <ion-icon name="menu-outline"></ion-icon>
                 </div>
             </div>
+            
 
             <!-- ======================= section 1 ================== -->
             <section id="section 1">
+              
                 <!-- ======================= Cards ================== -->
                 <div class="cardBox">
                     <div class="card">
@@ -296,7 +427,7 @@ td.text-right {
                         </div>
 
                         <div class="iconBx">
-                            <ion-icon name="podium-outline"></ion-icon>
+                          <ion-icon name="cash-outline"></ion-icon>
                         </div>
                     </div>
 
@@ -307,7 +438,7 @@ td.text-right {
                         </div>
 
                         <div class="iconBx">
-                            <ion-icon name="cart-outline"></ion-icon>
+                            <ion-icon name="person-outline"></ion-icon>
                         </div>
                     </div>
 
@@ -318,7 +449,7 @@ td.text-right {
                         </div>
 
                         <div class="iconBx">
-                            <ion-icon name="ban-outline"></ion-icon>
+                          <ion-icon name="storefront-outline"></ion-icon>
                         </div>
                     </div>
 
@@ -329,7 +460,7 @@ td.text-right {
                         </div>
 
                         <div class="iconBx">
-                            <ion-icon name="cash-outline"></ion-icon>
+                          <ion-icon name="wallet-outline"></ion-icon>
                         </div>
                     </div>
                 </div>
@@ -446,12 +577,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
     }
 });
 
-    //run get All category
-    getAllDate(sessionStorage.getItem("UserId"));
-   // getting all orders information
-   getAllOrder(sessionStorage.getItem("MainAdnim"),"All orders");
-
-   getSubStore(sessionStorage.getItem("MainAdnim"));
+    
     
    var totalmoneyvalue;
    //get all Date for table category
@@ -488,10 +614,24 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
         });
     }
 
+    //run get All category
+    getAllDate(sessionStorage.getItem("UserId"));
+    // getting all orders information
+    getAllOrder(sessionStorage.getItem("MainAdnim"),"All orders");
+    
+    getSubStore(sessionStorage.getItem("MainAdnim"));
 
     window.onload = function(){
       
-        document.getElementById('Change1').click();
+      document.getElementById('Change1').click();
+
+      
+
+      if (sessionStorage.getItem("Activate")){
+
+      }else{
+        //showPopup();
+      }
     }
  
      //get all Date for table category
@@ -535,11 +675,13 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
 
 
     var countAllOrder = [];
-    var totalmoney = [];
-    var AllTotal = 0;
-    var profit = 0;
-    var revenue = 0;
-    var loss = 0;
+    var totalmoney    = [];
+    var AllTotal      = 0;
+    var profit        = 0;
+    var revenue       = 0;
+    var loss          = 0;
+
+    
     
     async function getAllOrder(companyName,index){
         var totalSub = 0;
@@ -549,7 +691,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
         //AllTotal += AllTotal;
         var currentMoney = 0;
         await onValue(starCountRef, async (snapshot) => {
-            var currentVale = parseInt(document.getElementById("All Order").innerText);
+            //var currentVale = parseInt(document.getElementById("All Order").innerText);
             
             totalmoney[0] = 0;
             var counter = 0;
@@ -566,25 +708,24 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
               
                     var valuefood = value;
               
-                    if (`${value}`.toString().includes("company name"))
+                    if (`${value}`.toString().includes("companyName"))
                       {
-                        CompanyGetName = `${value}`.toString().replace("company name,",'');
+                        CompanyGetName = `${value}`.toString().replace("companyName,",'');
                       }
                   }
 
-                  if (childSnapshot.val().ready == "Reject" && loadNew == false && CompanyGetName == companyName)
+                  if (childSnapshot.val().process == "Reject" && loadNew == false && CompanyGetName == companyName)
                   {
                     loss += parseFloat(childSnapshot.val().Total);
-                    document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
-                  }else if (childSnapshot.val().ready == false && loadNew == false && CompanyGetName == companyName)
+                    //document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
+                  }else if ((childSnapshot.val().process != 'Pickup' && childSnapshot.val().process != 'Delivery') && loadNew == false && CompanyGetName == companyName)
                   {
                     revenue += parseFloat(childSnapshot.val().Total);
-                  }else if (childSnapshot.val().ready && loadNew == false && CompanyGetName == companyName)
+                  }else if ((childSnapshot.val().process == 'Pickup' || childSnapshot.val().process == 'Delivery') && loadNew == false && CompanyGetName == companyName)
                   {
                     profit += parseFloat(childSnapshot.val().Total);
                   
-
-                    document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
+                    //document.getElementById("All Order").innerText = currentVale + countAllOrder[index] - totalSub;
                     totalmoney[0] = parseFloat(totalmoney[0]) + parseFloat(childSnapshot.val().Total);
                     if (totalmoney[0] != null)
                     {
@@ -619,6 +760,7 @@ $("#iframeAddcategory").on("tabsactivate", function(event, ui) {
         
         // Draw the chart and set the chart values
         function drawChart() {
+          
           var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
           ['Incoming', revenue],
@@ -796,5 +938,16 @@ function removeRow(btnName) {
         alert(e);  
     }  
 } 
+
+
+function showPopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'flex';
+    }
+
+    function closePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
     
     </script>

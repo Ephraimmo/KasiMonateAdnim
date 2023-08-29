@@ -100,6 +100,189 @@
     }
       
     </style>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  } 
+
+  div.dataTables_info, div.dataTables_length{
+    font-weight: bold;
+  padding: 10px;
+  letter-spacing: 1px;
+  
+  }
+
+  input[type="search"]{
+    font-size: 16px;
+    width: 100%;
+    line-height: 40px;
+    height: 5%;
+    border: 1px solid #333;
+    border-radius: 20px;
+    outline: none;
+    color: #333;
+    box-shadow: 1px 2px 8px rgba(0,0,0,0.2);
+} 
+
+.btn, .btn:hover {
+  color: #88a5b1;
+}
+
+.btn-primary, .btn-primary:hover, .btn-info, .btn-info:hover, .btn-success, .btn-success:hover, .btn-warning, .btn-warning:hover, .btn-danger, .btn-danger:hover, .btn-inverse, .btn-inverse:hover {
+  color: #fff;
+}
+
+.btn,.dt-button {
+  font: 14px Helvetica;
+  padding: 12px 22px 10px;
+  margin: 0;
+  border: none;
+  border-bottom: 3px #aacedd solid;
+  text-decoration: none;
+  background-image: -moz-linear-gradient(#ffffff, #f8f8f8);
+  background-image: -webkit-linear-gradient(#ffffff, #f8f8f8);
+  background-image: linear-gradient(#ffffff, #f8f8f8);
+  position: relative;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 0 25px -5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 0 25px -5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 25px -5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+.btn:active, .dt-button:active {
+  position: relative;
+  top: 3px;
+  border: none;
+}
+
+.btn-primary {
+  border-bottom: 3px #000609 solid;
+  background-image: -moz-linear-gradient(#0079bb, #005888);
+  background-image: -webkit-linear-gradient(#0079bb, #005888);
+  background-image: linear-gradient(#0079bb, #005888);
+}
+.btn-primary:hover {
+  background-image: -moz-linear-gradient(#009aee, #005888);
+  background-image: -webkit-linear-gradient(#009aee, #005888);
+  background-image: linear-gradient(#009aee, #005888);
+}
+
+.btn-info {
+  border-bottom: 3px #206376 solid;
+  background-image: -moz-linear-gradient(#71c1d8, #49afcd);
+  background-image: -webkit-linear-gradient(#71c1d8, #49afcd);
+  background-image: linear-gradient(#71c1d8, #49afcd);
+}
+.btn-info:hover {
+  background-image: -moz-linear-gradient(#99d2e3, #49afcd);
+  background-image: -webkit-linear-gradient(#99d2e3, #49afcd);
+  background-image: linear-gradient(#99d2e3, #49afcd);
+}
+
+.btn-success,.dt-button {
+  border-bottom: 3px #2d662d solid;
+  background-image: -moz-linear-gradient(#7ec77e, #5bb75b);
+  background-image: -webkit-linear-gradient(#7ec77e, #5bb75b);
+  background-image: linear-gradient(#7ec77e, #5bb75b);
+}
+.btn-success:hover, .dt-button:hover {
+  background-image: -moz-linear-gradient(#a2d6a2, #5bb75b);
+  background-image: -webkit-linear-gradient(#a2d6a2, #5bb75b);
+  background-image: linear-gradient(#a2d6a2, #5bb75b);
+}
+
+.btn-warning {
+  border-bottom: 3px #a86404 solid;
+  background-image: -moz-linear-gradient(#fbbc64, #faa732);
+  background-image: -webkit-linear-gradient(#fbbc64, #faa732);
+  background-image: linear-gradient(#fbbc64, #faa732);
+}
+.btn-warning:hover {
+  background-image: -moz-linear-gradient(#fcd296, #faa732);
+  background-image: -webkit-linear-gradient(#fcd296, #faa732);
+  background-image: linear-gradient(#fcd296, #faa732);
+}
+
+.btn-danger {
+  border-bottom: 3px #88201c solid;
+  background-image: -moz-linear-gradient(#e37873, #da4f49);
+  background-image: -webkit-linear-gradient(#e37873, #da4f49);
+  background-image: linear-gradient(#e37873, #da4f49);
+}
+.btn-danger:hover {
+  background-image: -moz-linear-gradient(#eba19e, #da4f49);
+  background-image: -webkit-linear-gradient(#eba19e, #da4f49);
+  background-image: linear-gradient(#eba19e, #da4f49);
+}
+
+.btn-inverse {
+  border-bottom: 3px black solid;
+  background-image: -moz-linear-gradient(#505050, #363636);
+  background-image: -webkit-linear-gradient(#505050, #363636);
+  background-image: linear-gradient(#505050, #363636);
+}
+.btn-inverse:hover {
+  background-image: -moz-linear-gradient(#696969, #363636);
+  background-image: -webkit-linear-gradient(#696969, #363636);
+  background-image: linear-gradient(#696969, #363636);
+}
+
+.btn-large {
+  font-size: 18px;
+  padding: 12px 22px 10px;
+}
+
+.btn-small {
+  font-size: 11px;
+  padding: 8px 16px 6px;
+}
+
+.btn-primary{
+  margin: 2px;
+}
+
+
+  table th {
+  background-color: #ff9800;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+table tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+table tr:hover td {
+  background-color: #ffedcc;
+}
+
+table td {
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+}
+</style>
 </head>
 <body>
 
@@ -248,10 +431,11 @@
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Branch</th>
-              <th scope="col">Order List</th>
-              <th scope="col">Order Number</th>
-              <th scope="col">Total Price</th>
-              <th scope="col">Order Type</th>
+              <th scope="col">Details</th>
+              <th scope="col">Number</th>
+              <th scope="col">Cashier</th>
+              <th scope="col">Total</th>
+              <th scope="col">Type</th>
               <th scope="col">Action</th>
             </tr>
         </thead>
@@ -263,10 +447,11 @@
             <tr>
               <th >Date</th>
               <th >Branch</th>
-              <th >Order List</th>
-              <th >Order Number</th>
-              <th >Total Price</th>
-              <th >Order Type</th>
+              <th >Details</th>
+              <th >Number</th>
+              <th >Cashier</th>
+              <th >Total</th>
+              <th >Type</th>
               <th >Action</th>
             </tr>
         </tfoot>
@@ -344,9 +529,9 @@
       }
 
       async function getAllOrder(companyName,valueOnChange){
-        var data = [];
+        
         await onSnapshot( collection(db, 'BusinessesData'), (docSnap) => {
-            
+          
            
             docSnap.forEach( async (doc) => {
 
@@ -366,6 +551,7 @@
            }
 
            let tab = "";
+           var data = [];
 
             snapshot.forEach((childSnapshot) => {
               const childKey = childSnapshot.key;
@@ -380,9 +566,6 @@
               var Reject = '';
               var reload = false; 
 
-
-              
-
               for (const [key, value] of Object.entries(entries)) {
 
                 var valuefood = value;
@@ -395,22 +578,22 @@
                   foodList = foodList.replace(",",'');
                   foodList = foodList.replace(",",'');
                 }
-                else if (`${value}`.toString().includes("Preparing Food"))
-                {
-                  PreparingFood = `${value}`.toString().replace("Preparing Food,",'');  
-                  //console.log("value :" + `${value}` + " " + PreparingFood);
-                }else if (`${value}`.toString().includes("ready"))
-                {
-                  ready = `${value}`.toString().replace("ready,",'');  
-                  //console.log("value :" + `${value}` + " " + ready);
+              }
+
+              //Lisi My product on the table
+              var foodList = "<ol><li>" + foodList + '</li></ol>';
+
+              if (foodList.split(',').length > 1){
+                while(foodList.includes(',')){
+                  foodList = foodList.replace(",", '</li><li>');
                 }
               }
               
-              console.log(ready);
+              
 
-              if (ready == "true")
+              if (childData.process == "Pickup" || childData.process == "Delivery")
                 Action = '<span class="badge bg-success badge-font-size: 1.75em;" style=  "width:100%;">Completed</span>';
-              else if (ready == "Reject")
+              else if (childData.process == "Reject")
                 Action = "<span class='badge bg-danger badge-font-size: 1.75em;' style=  'width:100%;'>Rejected</span>";
               else 
                 return;
@@ -419,13 +602,15 @@
               
               if (valueOnChange != "All orders")
               {
-                if (ready == "Reject" && valueOnChange == "Completed")
+                if (childData.process == "Reject" && valueOnChange == "Completed")
                   return;
-                if (ready == "true" && valueOnChange == "Rejected")
+                if (childData.process == "Pickup" && valueOnChange == "Rejected")
+                  return;
+                if (childData.process == "Delivery" && valueOnChange == "Rejected")
                   return;
               }
                 
-              data.push([childData.Date,companyName,foodList,childData.Order_number,childData.Total,childData.type,Action]);
+              data.push([childData.Date,childData.companyName,foodList,'#' + childData.Order_number,childData.user,'R' + parseFloat(childData.Total).toFixed(2),childData.type,Action]);
 
             });
             
@@ -535,10 +720,11 @@
                 columns: [
                     { title: 'Date' },
                     { title: 'Branch' },
-                    { title: 'Order List' },
-                    { title: 'Order Number' },
-                    { title: 'Total Price' },
-                    { title: 'Order Type' },
+                    { title: 'Details' },
+                    { title: 'Number' },
+                    { title: 'Cashier' },
+                    { title: 'Total' },
+                    { title: 'Type' },
                     { title: 'Actions' },
                     
                 ],

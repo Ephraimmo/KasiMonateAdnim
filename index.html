@@ -295,9 +295,9 @@ async function Login(auth, email, password)
     }
 
     function closePopup() {
-  var popup = document.getElementById('popup');
-   popup.style.display = 'none';
-}
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+    }
 
   async function getUserDetails(UserUid){
     const docRef = doc(db, "MainUserAdim", UserUid);
@@ -311,6 +311,7 @@ async function Login(auth, email, password)
       sessionStorage.setItem("UserEmail", docSnap.data().UserEmail);
       sessionStorage.setItem("UserNumber", docSnap.data().UserNumber);
       sessionStorage.setItem("status", docSnap.data().status);
+      sessionStorage.setItem("Activate", docSnap.data().Activate);
 
       window.location.replace("mainIndex.html");
       toastshowLoadingToast.classList.remove("show");
